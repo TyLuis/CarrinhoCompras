@@ -69,7 +69,5 @@ public class ProdutosController {
 
     public void setProduto(Produtos produto) {
         this.produto = produto;
-    }
-   
-   
+    }  
 }
