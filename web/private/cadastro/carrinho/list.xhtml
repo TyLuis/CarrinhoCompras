@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/private/template/template.xhtml">
+        <ui:define name="conteudo">
+            <p:panel id="panel" header="Carrinho" style="margin: 15px;">
+                <p:dataTable value="#{carrinhoMB.carrinhos}" var="carrinho" emptyMessage="Nenhum produto selecionado">
+                    <p:column headerText="Produto" sortBy="#{carrinho.produto.descricao}">
+                        <h:outputText value="#{carrinho.produto.descricao}"/>
+                    </p:column>
+                    <p:column headerText="Quantidade" sortBy="#{carrinhoMB.carrinho.quantidade}">
+                        <h:outputText value="#{carrinhoMB.carrinho.quantidade}">
+                            <f:convertNumber minFractionDigits="2"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Valor do produto" sortBy="#{carrinho.produto.valor}">
+                        <h:outputText value="#{carrinho.produto.valor}"/>
+                    </p:column>
+                    <p:column headerText="Excluir" width="80">
+                        <p:commandLink value="Excluir" action="#{carrinhoMB.excluir(carrinho)}" 
+                                       onclick="if (!confirm('Confirma a exclusão?')) return false"/>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <div align="center">
+                    <p:commandButton id="novo" value="Adicionar produto" action="#{carrinhoMB.novo()}"/>
+                </div>
+            </p:panel>
+            <br/>
+            <div class="ui-g-3" >
+                <label>Forma de pagamento</label><br/><br/>
+                <p:selectOneMenu id="pagamento" value="#{carrinhoMB.forma}" style="width: 150%"
+                                         required="true" requiredMessage="Forma de pagamento é obrigatório">
+                            <f:selectItem itemValue="Dinheiro" itemLabel="Dinheiro" />
+                            <f:selectItem itemValue="Cartão de Crédito" itemLabel="Cartão de Crédito" />
+                            <f:selectItem itemValue="Cartão de Débito" itemLabel="Cartão de Débito" />
+                            <f:selectItem itemValue="Cheque" itemLabel="Cheque" />
+                        </p:selectOneMenu><br/><br/>
+                        <p:commandButton action="#{carrinhoMB.boraFechar()}" value="Finalizar" update="growl" style="margin-right: 20px;"/>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -2,22 +2,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Carrinho de compras</title>
-    </h:head>
-    <h:body>
-        <h:form>
-            <p:growl id="growl" life="3000"/>
-            <label>Descrição:</label>
-            <p:inputText value="#{ProdutoMB.produto.descricao}" required="true" requiredMessage="Descrição é obrigatória!"/>
-            <label>Quantidade:</label>
-            <p:inputText value="#{ProdutoMB.produto.quantidade}" required="true" requiredMessage="Quantidade é obrigatória!"/>
-            <label>Valor:</label>
-            <p:inputText value="#{ProdutoMB.produto.valor}" required="true" requiredMessage="Valor é obrigatório!"/>
-            <p:commandButton action="#{ProdutoMB.alterar()}" value="Alterar" update="growl"/>
-            <p:commandButton action="#{ProdutoMB.cancelar()}" value="Cancelar" immediate="true"/>
-        </h:form>
-    </h:body>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/private/template/template.xhtml">
+        <ui:define name="conteudo">
+            <p:panel id="panel" header="Categorias" style="margin: 15px;">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <label>Descrição:</label>
+                        <p:inputText value="#{ProdutoMB.produto.descricao}" required="true" requiredMessage="Descrição é obrigatória!"/>
+                    </div>
+                    <div class="ui-g-12">
+                        <label>Quantidade:</label>
+                        <p:inputText value="#{ProdutoMB.produto.quantidade}" required="true" requiredMessage="Quantidade é obrigatória!"/>
+                    </div>
+                    <div class="ui-g-12">
+                        <label>Valor:</label>
+                        <p:inputText value="#{ProdutoMB.produto.valor}" required="true" requiredMessage="Valor é obrigatório!"/>
+                    </div>
+                </div>
+                <br/>
+                <div align="center">
+                    <p:commandButton action="#{ProdutoMB.alterar()}" value="Alterar" update="growl"/>
+                    <p:commandButton action="#{ProdutoMB.cancelar()}" value="Cancelar" immediate="true"/>
+                </div>
+                <br/>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
 </html>
 

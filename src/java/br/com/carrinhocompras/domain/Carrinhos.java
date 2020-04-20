@@ -6,8 +6,8 @@
 package br.com.carrinhocompras.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -15,28 +15,24 @@ import javax.validation.constraints.NotNull;
  *
  * @author Luis
  */
-public class Produtos implements Serializable{
+public class Carrinhos implements Serializable{
+    
+    @Id
     private Integer id;
+    
+    @ManyToOne
+    private Produtos produto;
     
     @NotNull
     private Integer quantidade;
-    
-    @NotNull
-    private String descricao;
-    
-    @NotNull
-    private Float valor;
-    
-    private List<Carrinhos> carrinhos;
 
-    public Produtos() {
+    public Carrinhos() {
     }
 
-    public Produtos(Integer id, Integer quantidade, String descricao, Float valor) {
+    public Carrinhos(Integer id, Produtos produto, Integer quantidade) {
         this.id = id;
+        this.produto = produto;
         this.quantidade = quantidade;
-        this.descricao = descricao;
-        this.valor = valor;
     }
 
     public Integer getId() {
@@ -47,36 +43,20 @@ public class Produtos implements Serializable{
         this.id = id;
     }
 
+    public Produtos getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produtos produto) {
+        this.produto = produto;
+    }
+
     public Integer getQuantidade() {
         return quantidade;
     }
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Float getValor() {
-        return valor;
-    }
-
-    public void setValor(Float valor) {
-        this.valor = valor;
-    }
-
-    public List<Carrinhos> getCarrinhos() {
-        return carrinhos;
-    }
-
-    public void setCarrinhos(List<Carrinhos> carrinhos) {
-        this.carrinhos = carrinhos;
     }
     
     @Override
@@ -97,15 +77,15 @@ public class Produtos implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Produtos other = (Produtos) obj;
+        final Carrinhos other = (Carrinhos) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
-        return "Produtos{" + "id=" + id + ", descricao=" + descricao + ", quantidade=" + quantidade+ ", valor=" + valor +'}';
+        return "Carrinhos{" + "id=" + id + ", produto=" + produto + ", quantidade=" + quantidade +'}';
     }
 }
